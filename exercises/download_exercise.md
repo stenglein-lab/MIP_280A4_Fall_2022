@@ -12,7 +12,7 @@
 
 ## First: Install conda environment with software we'll need
 
-Installing bioinformatics software can be challenging!  We will again use [Conda](http://anaconda.org) to install the software we need.
+Installing bioinformatics software can be challenging!  We will again use [Conda](http://anaconda.org) to install the software we need.  
 
 You will create a new conda environment that includes the tools you'll need for the remainder of this exercise on the thoth01 server.  The tools are listed in [this file](../conda_environment/mip_280_conda.yaml)
 
@@ -36,7 +36,6 @@ conda activate bio_tools
 ```
 
 **You will need to activate this environment every time you want to use these tools.**
-
 
 
 
@@ -103,8 +102,9 @@ head -20 SRR1984309_1.fastq SRR1984309_2.fastq
 
 ---
 
-#### We will possibly stop here today
+#### We may stop here today
 
+---
 
 ### Using FastQC to evaluate quality of NGS data
 
