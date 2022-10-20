@@ -51,7 +51,7 @@ To get the dataset, open a browser and navigate to the pubmed page for the datas
 
 https://www.ncbi.nlm.nih.gov/pubmed/25993603
 
-Scroll down and find the 'Related information' section of the bottom right of the page.  Click on the SRA link.  This shows the SRA datasets associated with this paper.  SCroll through the datasets until you find the one for `snake_7` (not snake_7_viral).  Note that the reads in this dataset are supposedly already trimmed.  Note at the bottom of the page the run # (SRR #) for this dataset: SRR1984309
+Scroll down and find the 'Related information' section of the bottom right of the page.  Click on the SRA link.  This shows the SRA datasets associated with this paper.  Scroll through the datasets until you find the one for `snake_7` (not snake_7_viral).  Note that the reads in this dataset are supposedly already trimmed.  Note at the bottom of the page the run # (SRR #) for this dataset: SRR1984309
 
 We're going to download this dataset using the command line tool fastq-dump, part of the [SRA toolkit](https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=toolkit_doc).  First, let's create a directory (folder) in which to work.  Open the terminal app on your laptop and type these commands:
 
