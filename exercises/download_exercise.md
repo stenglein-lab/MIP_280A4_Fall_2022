@@ -165,7 +165,7 @@ NGS data can have problems.  Two main problems are:
 
 1. Often, NGS reads contain adapters sequences.  This happens when the library molecules are too short, and the sequence reads go all the way through the insert (the part of the library molecule derived from the sample) and into the opposite adapter.
 
-<img src="./paired_read_outcomes.png" alt="Adapter sequences occur in reads when reads are longer than the insert" width="650"/>
+<img src="paired_read_outcomes.png" alt="Adapter sequences occur in reads when reads are longer than the insert" width="650"/>
 
 2. Quality tends to decrease towards the ends of Illumina reads.  It is good to trim off low quality bases from the ends of reads.
 
@@ -182,8 +182,11 @@ cutadapt \
    -o SRR1984309_1_trimmed.fastq \
    -p SRR1984309_2_trimmed.fastq \
    SRR1984309_1.fastq \
-   SRR1984309_2.fastq 
+   SRR1984309_2.fastq \
+   | tee cutadapt.log
 ``` 
+
+Note that using a `\` as the last character of a command line allows you to split commands over multiple lines.
 
 Let's breakdown the [cutadapt options](https://cutadapt.readthedocs.io/en/stable/guide.html) that we used:
 
@@ -199,8 +202,6 @@ Let's breakdown the [cutadapt options](https://cutadapt.readthedocs.io/en/stable
 | SRR1984309_1.fastq | an input file containing reads. |
 | SRR1984309_2.fastq | an input file containing paired reads. |
 
-:question: **Questions:**
-1. How many 
 
 OK, let's confirm that the trimmed reads exist:
 
@@ -208,9 +209,17 @@ OK, let's confirm that the trimmed reads exist:
 ls -lh
 ```
 
-Now, we can use fastqc to analyze the trimmed datasets:
+---
+:question: **Questions:**
+1. What does the `| tee cutadapt.log` do in the command above?
+2. How many 
+---
+
+
+Now, we can use fastqc again to analyze the trimmed datasets:
 ```
-fastqc SRR1984309_1_trimmed.fastq SRR1984309_2_trimmed.fastq
+# run a fastq command to generate reports describing the trimmed fastq files
+# (I'm not going to tell you the command: you have to figure it out)
 ```
 
 Transfer the fastq html files using sftp to your computer and open them html files in a browswer and answer these questions:
