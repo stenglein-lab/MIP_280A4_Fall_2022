@@ -3,9 +3,10 @@
 
 ## In this exercise, we will download, process, and evaluate NGS datasets and genome sequences.  We will:
 
-* Download a dataset from the SRA
+* Setup a computing environment using conda
+* Download a dataset from the NCBI SRA database
 * Use the FASTQC tool to assess the quality of the reads in the dataset
-* Use cutadapt to remove low quality parts of the reads1
+* Use cutadapt to remove low quality and adapter-derived parts of the reads
 * Find and download genome sequences and associated annotation from NCBI
 
 ---
@@ -35,11 +36,11 @@ To activate this conda environment, you will need to run:
 conda activate bio_tools
 ```
 
-**You will need to activate this environment every time you want to use these tools.**
+:warning: **You will need to activate this environment every time you want to use these tools.**
 
 
 
-## Second: Downloading an SRA dataset
+### Downloading an SRA dataset
 
 We will download one of the NGS datasets reported in [this paper](http://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1004900)
 
@@ -51,9 +52,9 @@ To get the dataset, open a browser and navigate to the pubmed page for the datas
 
 https://www.ncbi.nlm.nih.gov/pubmed/25993603
 
-Scroll down and find the 'Related information' section of the bottom right of the page.  Click on the SRA link.  This shows the SRA datasets associated with this paper.  Scroll through the datasets until you find the one for `snake_7` (not snake_7_viral).  Note that the reads in this dataset are supposedly already trimmed.  Note at the bottom of the page the run # (SRR #) for this dataset: SRR1984309
+Scroll down and find the 'Related information' section of the bottom right of the page.  Click on the SRA link.  This shows the SRA datasets associated with this paper.  Scroll through the datasets until you find the one for `snake_7` (_not_ snake_7_viral).  Note that the reads in this dataset are supposedly already trimmed.  Note at the bottom of the page the run # (SRR #) for this dataset: `SRR1984309`.  This is an accession in the SRA database for this run.  You will need this accession to download the SRA data from the command line.
 
-We're going to download this dataset using the command line tool fastq-dump, part of the [SRA toolkit](https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=toolkit_doc).  First, let's create a directory (folder) in which to work.  Open the terminal app on your laptop and type these commands:
+We're going to download this dataset using the command line tool `fastq-dump`, part of the [SRA toolkit](https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=toolkit_doc).  First, let's create a directory (folder) in which to work.  Open the terminal app on your laptop and type these commands:
 
 change (move) to your home directory, if not already there
 ```
@@ -76,11 +77,12 @@ double check you are in the directory you think you are:
 pwd
 ```
 
-We will download the dataset using the fastq-dump tool, part of the [SRA toolkit](https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=toolkit_doc).  We included the SRA toolkit in the conda environment we created earlier.
+We will download the dataset using the `fastq-dump` tool, part of the [SRA toolkit](https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=toolkit_doc).  We included the SRA toolkit in the conda environment we created earlier.
 
-To run fasta-dump, you just need to specify the run # (the SRR#) of the dataset you want.  Recall that our run # is SRR1984309. The --split-files option of the command will create 2, synchronized files for the paired reads
+To run `fasta-dump`, you just need to specify the accession (the SRR#) of the dataset you want.  Recall that our accession is SRR1984309. The `--split-files` option of the command will create 2, synchronized files for the paired reads
 
 ```
+# download the data from the SRA
 fastq-dump SRR1984309 --split-files
 ```
 
@@ -94,15 +96,11 @@ Have a look at the first 20 lines of the fastq files using the head command
 ```
 head -20 SRR1984309_1.fastq SRR1984309_2.fastq
 ```
-
+:question: Questions:
 - What is on each of the 4-lines that make up each sequence?  (See: [FASTQ format](https://en.wikipedia.org/wiki/FASTQ_format))  
 - The quality scores for this dataset are in Illumina 1.9 format.  What is the maximum quality score for each basecall?  How does that relate to the estimated probability that a basecall is wrong?
-- How many reads are in each file?  (Hint: the `wc -l name_of_file` command will tell you the number of lines in the file)
+- How many reads are in each file?  (Hint: the `wc -l name_of_file` command will tell you the number of *lines* in the file)
 
-
----
-
-#### We may stop here today
 
 ---
 
@@ -118,6 +116,67 @@ FastQC can be used via a graphical interface or via the command line.  On your l
 
 Navigate to that folder and open FastQC.  Then open the fastq files you downloaded from the SRA.  FastQC will take a couple seconds to analyze them.
 
-These datasets have already been pre-cleaned, so they look pretty good.  Note that there is possible Nextera adapter contamination towards the end of some reads.  This makes sense, because the libraries were made with the Nextera protocol.  In the next class, we will trim those off.
+These datasets have already been pre-cleaned, so they look pretty good.  Note that there is possible Nextera adapter contamination towards the end of some reads.  This makes sense, because the libraries were made with the Nextera protocol.  
+
+
+### Cleaning raw NGS data
+
+NGS data can have problems.  Two main problems are:
+
+1. Often, NGS reads contain adapters sequences.  This happens when the library molecules are too short, and the sequence reads go all the way through the insert (the part of the library molecule derived from the sample) and into the opposite adapter.
+
+<img src="paired_read_outcomes.png" alt="Adapter sequences occur in reads when read length > insert size" width="650"/>
+
+2. Quality tends to decrease towards the ends of Illumina reads.  It is good to trim off low quality bases from the ends of reads.
+
+[cutadapt](https://cutadapt.readthedocs.io/en/stable/) is a tool that can be used to trim low quality and adapter sequences from NGS reads.  
+
+We will run this cutadapt command to trim our reads:
+
+```
+cutadapt \
+   -a AGATGTGTATAAGAGACAG \
+   -A AGATGTGTATAAGAGACAG \
+   -q 30,30 \
+   --minimum-length 80 \
+   -o SRR1984309_1_trimmed.fastq \
+   -p SRR1984309_2_trimmed.fastq \
+   SRR1984309_1.fastq \
+   SRR1984309_2.fastq 
+``` 
+
+Let's breakdown the [cutadapt options](https://cutadapt.readthedocs.io/en/stable/guide.html) that we used:
+
+|     | Meaning |
+| --- | ------- |
+| cutadapt | the name of the command |
+| -a AGATGTGTATAAGAGACAG | the Nextera-style adapter sequence to remove.  -a: remove from 3' end of reads. |
+| -A AGATGTGTATAAGAGACAG | -A: remove from 3' end of paired read. |
+| -q 30,30 | trim bases with Q scores < 30 from both ends of reads |
+| --minimum-length 80 | only keep reads that are >= 80 bases after trimming |
+
+:question: Questions:
+1. How many 
+
+OK, let's confirm that the trimmed reads exist:
+
+```
+ls -lh
+```
+
+Now, we can use fastqc to analyze the trimmed datasets:
+```
+fastqc SRR1984309_1_trimmed.fastq SRR1984309_2_trimmed.fastq
+```
+
+Transfer the fastq html files using sftp to your computer and open them html files in a browswer and answer these questions:
+
+- How many reads remain after trimming?
+- Did the quality of the basecalls improve?
+- Did the trimming remove Nextera adapters?
+
+Note: There are many trimming tools. Other popular trimming tools include [BBDuk](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbduk-guide/) and [cutadapt](https://cutadapt.readthedocs.io/en/stable/).
+
+---
 
 
