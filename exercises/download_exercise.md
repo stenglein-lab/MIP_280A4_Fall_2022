@@ -61,7 +61,7 @@ conda activate bio_tools
 - Another tool in this environment that we will use today is named `cutadapt`.  What version of `cutadapt` is in your `bio_tools` conda environment?  How did you figure that out?
 ---
 
-### Downloading an SRA dataset
+## Downloading an SRA dataset
 
 We will download one of the NGS datasets reported in [this paper](http://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1004900)
 
@@ -134,35 +134,38 @@ head -20 SRR1984309_1.fastq SRR1984309_2.fastq
 :question: **Questions:**
 - How does the first read in `SRR1984309_1.fastq` relate to the first read in `SRR1984309_2.fastq`?  
 - How many reads are in each file?  (Hint: the `wc -l name_of_file` command will tell you the number of *lines* in the file)
----
 
 <br>
-<br>
 
 ---
 
-### Using FastQC to evaluate quality of NGS data
+## Using FastQC to evaluate quality of NGS data
 
 [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is a tool that: 
 
 > ... aims to provide a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It provides a modular set of analyses which you can use to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis
 
-Performing a quick check like this of your data is one of the first things you'll want to do when you receive your new sequencing data (or when you download a dataset from an online repository like the SRA).
+Performing a check like this of your data is one of the first things you'll want to do when you receive your new sequencing data (or when you download a dataset from an online repository like the SRA).  Running fastqc from the command line is easy: you just provide the names of the fastq files you want to analyze.
 
-FastQC can be used via a graphical interface or via the command line.  On your laptops, the FastQC graphical interface is on the Desktop in: /GDW_Apps/FastQC
+``` 
+fastqc SRR1984309_1.fastq SRR1984309_2.fastq
+```
 
-Navigate to that folder and open FastQC.  Then open the fastq files you downloaded from the SRA.  FastQC will take a couple seconds to analyze them.
+The output of fastqc are html files that contain a report describing various aspects of the data.  Transfer these html files to your laptops and open them in a browser.
 
-These datasets have already been pre-cleaned, so they look pretty good.  Note that there is possible Nextera adapter contamination towards the end of some reads.  This makes sense, because the libraries were made with the Nextera protocol.  
+---
+:question: **Questions:**
+---
 
 
-### Cleaning raw NGS data
+
+## Cleaning raw NGS data
 
 NGS data can have problems.  Two main problems are:
 
 1. Often, NGS reads contain adapters sequences.  This happens when the library molecules are too short, and the sequence reads go all the way through the insert (the part of the library molecule derived from the sample) and into the opposite adapter.
 
-<img src="paired_read_outcomes.png" alt="Adapter sequences occur in reads when read length > insert size" width="650"/>
+<img src="paired_read_outcomes.png" alt="Adapter sequences occur in reads when reads are longer than the insert" width="650"/>
 
 2. Quality tends to decrease towards the ends of Illumina reads.  It is good to trim off low quality bases from the ends of reads.
 
