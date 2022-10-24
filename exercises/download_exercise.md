@@ -26,9 +26,12 @@ First, let's look for a command we need named `fastqc`. Check to see if fastqc i
 # is fastqc in your PATH?
 which fastqc
 ```
+
+---
 :question: **Questions:**
 - Is `fastqc` in your `PATH`?  How do you know?
 - What would happen if you tried to run the command `fastqc`?  (What does the shell output?)
+---
 
 Sadly, we don't have `fastqc` :confused:.  Let's solve that problem by creating a new "conda environment" with all the software we'll need for this class!
 
@@ -50,11 +53,13 @@ conda activate bio_tools
 
 :warning: **You will need to activate this environment every time you want to use these tools.**
 
+---
 :question: **Questions:**
 - Now (with bio_tools activated), what is the output of the command `which fastqc`?
 - Now (with bio_tools activated), what is the output of the command `echo $PATH`?  
 - Based on the previous answer, how do you think conda environments relate to your `PATH`? 
 - Another tool in this environment that we will use today is named `cutadapt`.  What version of `cutadapt` is in your `bio_tools` conda environment?  How did you figure that out?
+---
 
 ### Downloading an SRA dataset
 
