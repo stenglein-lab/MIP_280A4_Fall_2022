@@ -15,14 +15,26 @@
 
 Installing bioinformatics software can be challenging!  We will again use [Conda](http://anaconda.org) to install the software we need.  
 
-You will create a new conda environment that includes the tools you'll need for the remainder of this exercise on the thoth01 server.  The tools are listed in [this file](../conda_environment/mip_280_conda.yaml)
 
 Login to the thoth01 server:
 ```
 ssh your_username@thoth01.cvmbs.colostate.edu
 ```
 
-Create a new conda environment named bio_tools by running this command
+First, let's look for a command we need named `fastqc`. Check to see if fastqc is available to you using the `which` command:
+```
+# is fastqc in your PATH?
+which fastqc
+```
+:question: **Questions:**
+- Is fastqc in your PATH?  How do you know?
+- What would happen if you tried to run the command `fastqc`?  (What does the shell output?)
+
+Sadly, we don't have `fastqc` :confused:.  Let's solve that problem by creating a new "conda environment" with all the software we'll need for this class!
+
+The tools are listed in [this file](../conda_environment/bio_tools.yaml).  
+
+First, we'll download this yaml file and then we'll use `conda env create` to create a new environment.
 ```
 # download the yaml file from github
 curl -OL https://raw.githubusercontent.com/stenglein-lab/MIP_280A4_Fall_2022/main/conda_environment/bio_tools.yaml
@@ -38,7 +50,11 @@ conda activate bio_tools
 
 :warning: **You will need to activate this environment every time you want to use these tools.**
 
-
+:question: **Questions:**
+- Now (with bio_tools activated), what is the output of the command `which fastqc`?
+- Now (with bio_tools activated), what is the output of the command `echo $PATH`?  
+- Based on the previous answer, how do you think conda environments relate to your `PATH`? 
+- Another tool in this environment that we will use today is named `cutadapt`.  What version of `cutadapt` is in your `bio_tools` conda environment?  How did you figure that out?
 
 ### Downloading an SRA dataset
 
@@ -147,8 +163,8 @@ cutadapt \
 
 Let's breakdown the [cutadapt options](https://cutadapt.readthedocs.io/en/stable/guide.html) that we used:
 
-|     | Meaning |
-| --- | ------- |
+| Part | Meaning |
+| ---- | ------- |
 | cutadapt | the name of the command |
 | -a AGATGTGTATAAGAGACAG | -a: remove a sequence from the 3' end of reads.<br>AGAT... = the Nextera-style adapter sequence to remove.|
 | -A AGATGTGTATAAGAGACAG | -A: remove a sequence from the 3' end of *paired* reads. |
@@ -156,8 +172,8 @@ Let's breakdown the [cutadapt options](https://cutadapt.readthedocs.io/en/stable
 | --minimum-length 80 | only keep reads that are >= 80 bases after trimming |
 | -o SRR1984309_1_trimmed.fastq | the name of a new file containing trimmed reads. |
 | -p SRR1984309_2_trimmed.fastq | the name of a new file containing trimmed paired reads. |
-| SRR1984309_1.fastq | an input file containing reads. "
-| SRR1984309_2.fastq | an input file containing paired reads. "
+| SRR1984309_1.fastq | an input file containing reads. |
+| SRR1984309_2.fastq | an input file containing paired reads. |
 
 :question: **Questions:**
 1. How many 
