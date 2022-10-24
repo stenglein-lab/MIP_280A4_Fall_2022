@@ -1,4 +1,4 @@
-# Downloading and Processing Datasets and Genomes exercise
+# Downloading and Cleaning-up Raw NGS Data
 ---
 
 ## In this exercise, we will download, process, and evaluate NGS datasets and genome sequences.  We will:
