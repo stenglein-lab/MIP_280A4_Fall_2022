@@ -215,7 +215,7 @@ ls -lh
 
 Now, we can run `fastqc` again to analyze the trimmed datasets:
 ```
-# run a fastq command to generate reports describing the *trimmed* fastq files
+# run a fastq command to generate reports describing the trimmed fastq files
 # (I'm not going to tell you the command: you have to figure it out)
 ```
 
@@ -228,7 +228,7 @@ Transfer the fastq html files to your computer and open them html files in a bro
 - Did the trimming remove Nextera adapters?
 ---
 
-Note: There are many trimming tools. Other popular trimming tools include [BBDuk](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbduk-guide/) and [fastp](https://github.com/OpenGene/fastp)
+Note: There are many other trimming tools besides cutadapt. Other popular trimming tools include [BBDuk](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbduk-guide/) and [fastp](https://github.com/OpenGene/fastp)
 
 
 
