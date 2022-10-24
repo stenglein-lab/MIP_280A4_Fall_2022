@@ -201,6 +201,7 @@ Let's breakdown the [cutadapt options](https://cutadapt.readthedocs.io/en/stable
 | -p SRR1984309_2_trimmed.fastq | the name of a new file containing trimmed paired reads. |
 | SRR1984309_1.fastq | an input file containing reads. |
 | SRR1984309_2.fastq | an input file containing paired reads. |
+| | tee cutadapt.log | see question below |
 
 
 OK, let's confirm that the trimmed reads exist:
@@ -211,25 +212,28 @@ ls -lh
 
 ---
 :question: **Questions:**
-1. What does the `| tee cutadapt.log` do in the command above?
-2. How many 
+- What does the `| tee cutadapt.log` do in the command above?
+- What percentage of all bases were quality-trimmed?
+- What percent of Read1 reads contained adapter sequence?
+- What percent of read pairs made it through the filtering?
 ---
 
 
-Now, we can use fastqc again to analyze the trimmed datasets:
+Now, we can run `fastqc` again to analyze the trimmed datasets:
 ```
-# run a fastq command to generate reports describing the trimmed fastq files
+# run a fastq command to generate reports describing the *trimmed* fastq files
 # (I'm not going to tell you the command: you have to figure it out)
 ```
 
-Transfer the fastq html files using sftp to your computer and open them html files in a browswer and answer these questions:
-
-- How many reads remain after trimming?
-- Did the quality of the basecalls improve?
-- Did the trimming remove Nextera adapters?
-
-Note: There are many trimming tools. Other popular trimming tools include [BBDuk](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbduk-guide/) and [cutadapt](https://cutadapt.readthedocs.io/en/stable/).
+Transfer the fastq html files to your computer and open them html files in a browswer and answer these questions:
 
 ---
+:question: **Questions:**
+- How many read pairs remain after trimming?
+- Did the trimming remove Nextera adapters?
+---
+
+Note: There are many trimming tools. Other popular trimming tools include [BBDuk](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbduk-guide/) and [fastp](https://github.com/OpenGene/fastp)
+
 
 
