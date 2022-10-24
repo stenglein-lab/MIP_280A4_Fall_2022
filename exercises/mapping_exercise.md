@@ -192,10 +192,12 @@ head -20 SRR1984309_mapped_to_boa_mtDNA.sam
 
 You can see that there are several header lines beginning with `@`, and then one line for each mapped read.  See [here](http://genome.sph.umich.edu/wiki/SAM) or [here](https://samtools.github.io/hts-specs/SAMv1.pdf) for more information about interpreting SAM files.
 
+---
 :question: **Answer the following questions about the first mapped read:**
 - What position in the mtDNA sequence did it map to?
 - What is the mapping quality for this read's mapping?
 - What does this mapping quality score indicate?  
+---
 
 
 ### Visualizing aligned (mapped) reads in Geneious
@@ -216,15 +218,17 @@ Once you have the boa constrictor mitochondrial genome in a folder in Geneious, 
   - Click View->Expand Document View to enlarge the alignment
   - Try playing with the visualization settings in the panels on the right of the alignment
 
-- Some questions to consider when viewing the alignment:
-  - What is the average coverage depth across the mitochondrial genome?
-  - Is the coverage even across the mitochondrial genome?
-  - Would you expect coverage to be even across the genome?  (Recall that this data is derived from total RNA from liver tissue). 
-  - Are the mitochondrial genes expressed evenly?
-  - Are there any variants between this snake's mitochondrial genome sequence and the boa constrictor reference sequence?
-  - Is it expected that there are variants between these reads and this reference sequence?  Explain your answer.
-  - Can you distinguish true variants from sequencing errors?
-  - In general, how can you distinguish true variants from sequencing errors?
-  - Is it possible that reads that derive from the boa constrictor nuclear genome are mapping to this sequence?
-  - How would you prevent nuclear reads from mapping to the mitochondrial genome?
-  - Can you identify mapped read pairs?
+---
+:question: **Questions to consider when viewing the alignment:**
+- What is the average coverage depth across the mitochondrial genome?
+- Is the coverage even across the mitochondrial genome?
+- Would you expect coverage to be even across the genome?  (Recall that this data is derived from total RNA from liver tissue). 
+- Are the mitochondrial genes expressed evenly?
+- Are there any variants between this snake's mitochondrial genome sequence and the boa constrictor reference sequence?
+- Is it expected that there are variants between these reads and this reference sequence?  Explain your answer.
+- Can you distinguish true variants from sequencing errors?
+- In general, how can you distinguish true variants from sequencing errors?
+- Is it possible that reads that derive from the boa constrictor nuclear genome are mapping to this sequence?
+- How would you prevent nuclear reads from mapping to the mitochondrial genome?
+- Can you identify mapped read pairs?
+---
