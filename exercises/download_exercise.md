@@ -27,7 +27,7 @@ First, let's look for a command we need named `fastqc`. Check to see if fastqc i
 which fastqc
 ```
 :question: **Questions:**
-- Is fastqc in your PATH?  How do you know?
+- Is `fastqc` in your `PATH`?  How do you know?
 - What would happen if you tried to run the command `fastqc`?  (What does the shell output?)
 
 Sadly, we don't have `fastqc` :confused:.  Let's solve that problem by creating a new "conda environment" with all the software we'll need for this class!
