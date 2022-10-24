@@ -150,7 +150,7 @@ Let's breakdown the [cutadapt options](https://cutadapt.readthedocs.io/en/stable
 |     | Meaning |
 | --- | ------- |
 | cutadapt | the name of the command |
-| -a AGATGTGTATAAGAGACAG | -a: remove a sequence from the 3' end of reads.\n AGAT... = the Nextera-style adapter sequence to remove.|
+| -a AGATGTGTATAAGAGACAG | -a: remove a sequence from the 3' end of reads.<br>AGAT... = the Nextera-style adapter sequence to remove.|
 | -A AGATGTGTATAAGAGACAG | -A: remove a sequence from the 3' end of *paired* reads. |
 | -q 30,30 | trim bases with Q scores < 30 from 5' and 3' ends of reads |
 | --minimum-length 80 | only keep reads that are >= 80 bases after trimming |
