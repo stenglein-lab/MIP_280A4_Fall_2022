@@ -119,7 +119,6 @@ head -20 SRR1984309_1.fastq
 ```
 ---
 :question: **Questions:**
-- What is on each of the 4-lines that make up each sequence?  (See: [FASTQ format](https://en.wikipedia.org/wiki/FASTQ_format))  
 - What are the first 6 bases of the first read?
 - What are the quality scores - *in encoded single characters* - of the first 6 bases?
 - What quality scores do these characters represent?
@@ -151,12 +150,7 @@ Performing a check like this of your data is one of the first things you'll want
 fastqc SRR1984309_1.fastq SRR1984309_2.fastq
 ```
 
-The output of fastqc are html files that contain a report describing various aspects of the data.  Transfer these html files to your laptops and open them in a browser.
-
----
-:question: **Questions:**
----
-
+The output of fastqc are html files that contain a report describing various aspects of the data.  Transfer these html files to your laptops and open them in a browser.  The class will discuss these results together.
 
 
 ## Cleaning raw NGS data
@@ -175,8 +169,8 @@ We will run this cutadapt command to trim our reads:
 
 ```
 cutadapt \
-   -a AGATGTGTATAAGAGACAG \
-   -A AGATGTGTATAAGAGACAG \
+   -a CTGTCTCTTATACACATCT \
+   -A CTGTCTCTTATACACATCT \
    -q 30,30 \
    --minimum-length 80 \
    -o SRR1984309_1_trimmed.fastq \
@@ -193,28 +187,28 @@ Let's breakdown the [cutadapt options](https://cutadapt.readthedocs.io/en/stable
 | Part | Meaning |
 | ---- | ------- |
 | cutadapt | the name of the command |
-| -a AGATGTGTATAAGAGACAG | -a: remove a sequence from the 3' end of reads.<br>AGAT... = the Nextera-style adapter sequence to remove.|
-| -A AGATGTGTATAAGAGACAG | -A: remove a sequence from the 3' end of *paired* reads. |
+| -a CTGTCTCTTATACACATCT | -a: remove a sequence from the 3' end of reads.<br>CTGTCT... = the Nextera-style adapter sequence to remove.|
+| -A CTGTCTCTTATACACATCT | -A: remove a sequence from the 3' end of *paired* reads. |
 | -q 30,30 | trim bases with Q scores < 30 from 5' and 3' ends of reads |
 | --minimum-length 80 | only keep reads that are >= 80 bases after trimming |
-| -o SRR1984309_1_trimmed.fastq | the name of a new file containing trimmed reads. |
-| -p SRR1984309_2_trimmed.fastq | the name of a new file containing trimmed paired reads. |
+| -o SRR1984309_1_trimmed.fastq | the name of a new file that will contain trimmed reads. |
+| -p SRR1984309_2_trimmed.fastq | the name of a new file that will contain trimmed paired reads. |
 | SRR1984309_1.fastq | an input file containing reads. |
 | SRR1984309_2.fastq | an input file containing paired reads. |
 | | tee cutadapt.log | see question below |
 
 
-OK, let's confirm that the trimmed reads exist:
+OK, let's confirm that the trimmed read fastqs exist. Cutadapt should have created 2 new fastq files and a log file:
 
 ```
 ls -lh
 ```
 
 ---
-:question: **Questions:**
+:question: **Questions: (hint: look in cutadapt.log for answers)**
 - What does the `| tee cutadapt.log` do in the command above?
 - What percentage of all bases were quality-trimmed?
-- What percent of Read1 reads contained adapter sequence?
+- What percent of read1 reads contained adapter sequence?
 - What percent of read pairs made it through the filtering?
 ---
 
@@ -229,6 +223,7 @@ Transfer the fastq html files to your computer and open them html files in a bro
 
 ---
 :question: **Questions:**
+- What command did you use to run fastqc on the trimmed fastq?
 - How many read pairs remain after trimming?
 - Did the trimming remove Nextera adapters?
 ---
