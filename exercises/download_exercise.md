@@ -79,7 +79,7 @@ pwd
 
 We will download the dataset using the `fastq-dump` tool, part of the [SRA toolkit](https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=toolkit_doc).  We included the SRA toolkit in the conda environment we created earlier.
 
-To run `fasta-dump`, you just need to specify the accession (the SRR#) of the dataset you want.  Recall that our accession is SRR1984309. The `--split-files` option of the command will create 2, synchronized files for the paired reads
+To run `fastq-dump`, you just need to specify the accession (the SRR#) of the dataset you want.  Recall that our accession is SRR1984309. The `--split-files` option of the command will create 2, synchronized files for the paired reads
 
 ```
 # download the data from the SRA
@@ -150,12 +150,16 @@ Let's breakdown the [cutadapt options](https://cutadapt.readthedocs.io/en/stable
 |     | Meaning |
 | --- | ------- |
 | cutadapt | the name of the command |
-| -a AGATGTGTATAAGAGACAG | the Nextera-style adapter sequence to remove.  -a: remove from 3' end of reads. |
-| -A AGATGTGTATAAGAGACAG | -A: remove from 3' end of paired read. |
-| -q 30,30 | trim bases with Q scores < 30 from both ends of reads |
+| -a AGATGTGTATAAGAGACAG | -a: remove a sequence from the 3' end of reads.\n AGAT... = the Nextera-style adapter sequence to remove.|
+| -A AGATGTGTATAAGAGACAG | -A: remove a sequence from the 3' end of *paired* reads. |
+| -q 30,30 | trim bases with Q scores < 30 from 5' and 3' ends of reads |
 | --minimum-length 80 | only keep reads that are >= 80 bases after trimming |
+| -o SRR1984309_1_trimmed.fastq | the name of a new file containing trimmed reads. |
+| -p SRR1984309_2_trimmed.fastq | the name of a new file containing trimmed paired reads. |
+| SRR1984309_1.fastq | an input file containing reads. "
+| SRR1984309_2.fastq | an input file containing paired reads. "
 
-:question: Questions:
+:question: **Questions:**
 1. How many 
 
 OK, let's confirm that the trimmed reads exist:
