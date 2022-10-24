@@ -107,7 +107,7 @@ To run `fastq-dump`, you just need to specify the accession (the SRR#) of the da
 fastq-dump SRR1984309 --split-files
 ```
 
-Confirm that you downloaded the files.  You should see files named SRR1984309_1.fastq and SRR1984309_2.fastq that are each 44 Mb.
+Confirm that you downloaded the files.  You should see files named `SRR1984309_1.fastq` and `SRR1984309_2.fastq` that are each 44 Mb.
 
 ```
 ls -lh
@@ -118,7 +118,7 @@ Have a look at the first 20 lines of the read1 fastq file using the head command
 head -20 SRR1984309_1.fastq 
 ```
 ---
-:question: Questions:
+:question: **Questions:**
 - What is on each of the 4-lines that make up each sequence?  (See: [FASTQ format](https://en.wikipedia.org/wiki/FASTQ_format))  
 - What are the first 6 bases of the first read?
 - What are the quality scores - *in encoded single characters* - of the first 6 bases?
@@ -131,8 +131,8 @@ Have a look at the first 20 lines of both files:
 head -20 SRR1984309_1.fastq SRR1984309_2.fastq 
 ```
 ---
-:question: Questions:
-- How does the first read in SRR1984309_1.fastq relate to the first read in SRR1984309_2.fastq?  
+:question: **Questions:**
+- How does the first read in `SRR1984309_1.fastq` relate to the first read in `SRR1984309_2.fastq`?  
 - How many reads are in each file?  (Hint: the `wc -l name_of_file` command will tell you the number of *lines* in the file)
 ---
 
