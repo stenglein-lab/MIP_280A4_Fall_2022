@@ -165,7 +165,7 @@ NGS data can have problems.  Two main problems are:
 
 1. Often, NGS reads contain adapters sequences.  This happens when the library molecules are too short, and the sequence reads go all the way through the insert (the part of the library molecule derived from the sample) and into the opposite adapter.
 
-<img src="paired_read_outcomes.png" alt="Adapter sequences occur in reads when reads are longer than the insert" width="650"/>
+<img src="./paired_read_outcomes.png" alt="Adapter sequences occur in reads when reads are longer than the insert" width="650"/>
 
 2. Quality tends to decrease towards the ends of Illumina reads.  It is good to trim off low quality bases from the ends of reads.
 
