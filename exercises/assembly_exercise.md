@@ -21,7 +21,7 @@ First, change to the directory in which you have your fastq files containing tri
 
 Don't forget to activate the conda environment that contains the software you'll need:
 ```
-conda activate $HOME/bio_tools
+conda activate bio_tools
 ```
 
 Now, we'll run bowtie2 to map reads to the _entire_ boa constrictor genome.  This time we'll run bowtie2 a little differently:
