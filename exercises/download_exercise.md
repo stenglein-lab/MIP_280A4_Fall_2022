@@ -7,7 +7,7 @@
 * Download a dataset from the NCBI SRA database
 * Use the FASTQC tool to assess the quality of the reads in the dataset
 * Use cutadapt to remove low quality and adapter-derived parts of the reads
-* Find and download genome sequences and associated annotation from NCBI
+* Use the FASTQC tool to assess the quality of the reads in the dataset after trimming
 
 ---
 
