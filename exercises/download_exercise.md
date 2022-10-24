@@ -180,7 +180,7 @@ cutadapt \
    | tee cutadapt.log
 ``` 
 
-Note that using a `\` as the last character of a command line allows you to split commands over multiple lines.
+Note that using a `\` as the last character of a command line allows you to split commands over multiple lines.  This can improve readability of long commands.
 
 Let's breakdown the [cutadapt options](https://cutadapt.readthedocs.io/en/stable/guide.html) that we used:
 
@@ -207,7 +207,7 @@ ls -lh
 ---
 :question: **Questions: (hint: look in cutadapt.log for answers)**
 - What does the `| tee cutadapt.log` do in the command above?
-- What percentage of all bases were quality-trimmed?
+- What percentage of all bases were quality-trimmed (hint: see `cutadapt.log`)?
 - What percent of read1 reads contained adapter sequence?
 - What percent of read pairs made it through the filtering?
 ---
