@@ -11,11 +11,9 @@ MIP 280A4
 
 ### De-novo assembly of non-mapping reads
 
-Last time, you practiced mapping to a reference sequence by mapping reads to the boa constrictor mitochondrial genome.  Imagine instead that we *don't* have a reference sequence.  In that case, we'd need to perform de novo assembly.  
+Last time, you practiced mapping to a reference sequence by mapping reads to the boa constrictor mitochondrial genome.  Today we are going to align reads to the *entire* (nuclear + mitochondrial) boa constrictor genome, and  assemble the reads that *don't* map to the boa constrictor genome. So first let's map the reads in our dataset to the entire boa constrictor genome.
 
-There are a variety of de novo assemblers with different strengths and weaknesses.  We're going to use the [SPAdes assembler](http://cab.spbu.ru/software/spades/) to assemble the reads in our dataset that **don't** map to the boa constrictor genome. First, let's map the reads in our dataset to the _entire_ boa constrictor genome, not just the mitochondrial genome.
-
-The instructors have already downloaded an assembly of the boa constrictor genome from [here](http://gigadb.org/dataset/100060) and made a bowtie2 index, which can be found on thoth01 in /home/data_for_classes/2021_MIP_280A4.  We could have you make an index yourself, but that would take a long time for a Gb genome like the boa constrictor's.  The boa constrictor genome index is named boa_constrictor_bt_index.
+The instructors have already downloaded an assembly of the boa constrictor genome from [here](http://gigadb.org/dataset/100060) and made a bowtie2 index, which can be found on thoth01 in /home/data_for_classes/2022_MIP_280A4.  We could have you make an index yourself, but that would take a long time for a Gb genome like the boa constrictor's (an hour or two probably).  The boa constrictor genome index is named boa_constrictor_bt_index.
 
 First, change to the directory in which you have your fastq files containing trimmed sequences.  Confirm you are in the right directory by running `ls`.  You should see the trimmed fastq files.
 
@@ -29,7 +27,7 @@ Now, we'll run bowtie2 to map reads to the _entire_ boa constrictor genome.  Thi
 2. We'll keep track of which reads _didn't_ map to the genome using the --un-conc option
 
 ```
-bowtie2 -x /home/data_for_classes/2021_MIP_280A4/boa_constrictor_bt_index \
+bowtie2 -x /home/data_for_classes/2022_MIP_280A4/boa_constrictor_bt_index \
    --local \
    -1 SRR1984309_1_trimmed.fastq \
    -2 SRR1984309_2_trimmed.fastq \
@@ -47,13 +45,13 @@ bowtie2 -x /home/data_for_classes/2021_MIP_280A4/boa_constrictor_bt_index \
 - --no-unal: don't report unmapped reads in the sam file
 - --threads 24: use 24 threads (24 CPUs) to make bowtie2 run faster
 - -S: name of the sam format output file that will be generated
-- --un-conc: put read pairs that don't map into new fastq files with this name
+- --un-conc: put read pairs that *don't* map into new fastq files with this name
 
 #### Questions about this mapping
 
 - What percentage of reads mapped to the nuclear boa constrictor genome (nuclear + mitochondrial)?   [This is the "overall alignment rate"]
 - How does this compare to the percentage of reads that mapped to just the mitochondrial genome?
-- Does it make sense that this percentage of reads mapped to the entire genome?  
+- Does it make sense biologically that this percentage of reads mapped to the entire genome?  
 - What might be the source or sources of non-mapping reads?
 - The non-mapping reads should be in new files named `SRR1984309_not_boa_mapped.1.fastq` and `SRR1984309_not_boa_mapped.2.fastq`.  How many reads are in each of these files?
 
@@ -80,6 +78,7 @@ The big difference with running bowtie2 this time is that you are telling it tha
 ### Assembly
 
 Now, we are going to assembly the boa constrictor **non-mapping** reads to try to understand what might be making this snake sick.  
+There are a variety of de novo assemblers with different strengths and weaknesses.  We're going to use the [SPAdes assembler](http://cab.spbu.ru/software/spades/), which is a great general purpose assembler. 
 
 We will use the non-mapping reads as input to our de novo SPAdes assembly.  Run SPAdes as follows:
 
