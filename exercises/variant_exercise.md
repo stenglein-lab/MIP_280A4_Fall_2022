@@ -28,7 +28,7 @@ Open the terminal and change directory to a directory of your choosing (make a n
 The files for this exercise are in the directory `/home/data_for_classes/2021_MIP_280A4/`.  You need to copy this file into your current directory.
 
 ```
-cp /home/data_for_classes/2021_MIP_280A4/variant_exercise_files.tar.gz .
+cp /home/data_for_classes/2022_MIP_280A4/variant_exercise_files.tar.gz .
 ```
 
 The file extension `.tar.gz` is similar to .zip.  It means this is a compressed set of files.  
@@ -52,6 +52,10 @@ viral_genome.gb          # viral genome in GenBank (annotated) format
 We're going to use bowtie2 to map reads in the dataset to the viral genome.  First, we need to create a bowtie2 index.  Remember how to do that?
 
 ```
+# don't forget to activate the bio_tools conda environment
+conda activate bio_tools
+
+# build the index
 bowtie2-build viral_genome.fasta viral_genome_bt_index 
 ```
 
@@ -87,7 +91,6 @@ samtools sort -T tmp -O 'bam' Pool_reads_aligned_to_viral_genome.bam  > Pool_rea
 
 Now, we'll run lofreq.  To learn more about how you could run lofreq, run:
 ```
-conda activate $HOME/bio_tools  # activate the bio_tools conda environment
 lofreq                          # show general usage info
 lofreq call                     # show general usage info for the call command in lofreq (actually does variant calling)
 ```
@@ -109,7 +112,7 @@ less Pool_reads_aligned_to_viral_genome.vcf
 - Are the variants SNPs, or InDels?  Would you expect to see InDel variants here? 
 
 
-### Time permitting: Visualize and inspect mapped data supporting called variants in Geneious
+### Visualize and inspect mapped data supporting called variants in Geneious
 
 First, you need to get your reference sequence into Geneious, preferably with annotations.  Then you need to bring in the mapped reads (can bring in .sam or .bam format)
 
