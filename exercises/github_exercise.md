@@ -12,11 +12,11 @@ Today, you will create a github account (if you don't already have one) and a re
 
 You will need to use an email for your github account.  You may want to use an email that you expect to have for a long time (in other words, you may want to *not* use your CSU email if you plan to graduate from and leave CSU sometime.) 
 
-If you already have an account, log into to it.
-
 Later, you can customize your github profile if you want.  For instance by putting in a profile picture, providing a location, etc.
 
-Note that there is an option to keep your email private if you prefer (in the Settings for your github account).
+Note that there is an option to keep your email private if you prefer.
+
+> If you already have an account, log into to it.
 
 #### Create a personal access token
 
@@ -44,9 +44,9 @@ Let's create a repository that you will use to document your final project.
 - Click the green New button to create a new repository
 - Give it a name like `2022_MIP_280A4_final_project` or something 
 - For Description, enter something like "Final project for MIP 280A4, Microbial Sequence Analysis"
-- Leave it as a public repository (You can make it private but then you will have to add me as a collaborator for me to see it and help you or grade it.
+- Leave it as a public repository. (Or make it private but then you will have to add me as a collaborator for me to see it and help you or grade it.
 - Check on `Add a README file`
-- Choose a License if you want to put some copyright on your work.  You can also add one later.  People often use the MIT license for open source software.  You can also add a license later.
+- Choose a License if you want to put some copyright on your work.  People often use the MIT license for open source software.  You can also add a license later.
 - Click Create Repository
 
 #### Clone the repository
@@ -60,12 +60,12 @@ The basic steps for working with a repository are:
 - `git clone`: download a copy of a repository
 - make local changes: add files, edit files, add directories, etc.
 - `git add`: "stage" files to be committed.
-- `git commit`: commit the changes you've made.  You need to supply a message that describes what you did.
+- `git commit`: commit the changes you've made.  You'll need to supply a message that describes what you did.
 - `git push`: sync the changes you made locally to the remote repository.  This uploads any new files or edited files to the remote repository.
 
 Other relevant commands includ:
-- `git status`: give you information about 
-- `git diff`: tell you what's different between your local repo (what's on thoth01) and the remote repo (what's on github)
+- `git status`: gives you information about your repository: what's new, what's changed, etc.
+- `git diff`: tells you what's different between your local repo (what's on thoth01) and the remote repo (what's on github)
 - `git pull`: sync your local repo copy with the remote repo by pulling any changes that have been pushed to the remote repo.  This is necessary when you are working collaboratively with people on a project/repository.
 
 Let's clone your new repository so you can work with it on thoth01.  First, you need to find the URL for this repository.  This is found in the `<> Code` dropdown on the repository's main page.  This will be some URL like: `https://github.com/stenglein-lab/2022_MIP_280A4_final_project.git`  (with your username instead of stenglein-lab).  Copy this URL.  
@@ -111,7 +111,7 @@ My project is about x y z and my dataset is from a b c.
 
 You'll be filling this out as you complete the final project in the last weeks of class.
 
-BTW, if you want to become a command line power user, you can learn to edit with [vim](https://www.vim.org).  Check out [this video](https://www.youtube.com/watch?v=y4SzAr33st0) from the OMGenomics channel (Maria Nattestad) for a tutorial.
+BTW, if you want to become a command line power user, you can learn to edit files using the [vim](https://www.vim.org) text editor.  Check out [this video](https://www.youtube.com/watch?v=y4SzAr33st0) from the OMGenomics channel (Maria Nattestad) for a tutorial.
 
 
 #### Commit the local changes
@@ -178,4 +178,15 @@ git push origin main
 Your username will be the email you used when creating your github account.
 Your password will be the **access token** you created earlier.  Copy and paste this in.
 
-Now, go to your repository online and see that your new file is there.
+Now, go to your repository online and confirm that your new file is there.
+
+Great!  Now you understand how to interact with a github repository from the command line.  During your final project, your overall workflow will be:
+
+1. Add a new file or directory to the repository directory.  Or, edit an existing file.
+2. Use `git add` to stage the new or edited file.
+3. Use `git commit` to commit one or more changed files.
+4. Use `git push origin master` to sync the commit to github.
+5. Back to step 1.
+
+
+
